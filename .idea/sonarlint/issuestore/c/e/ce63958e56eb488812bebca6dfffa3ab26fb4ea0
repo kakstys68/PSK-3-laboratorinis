@@ -1,0 +1,15 @@
+
+0
+java:S1220""Move this file to a named package.
+r	java:S116"XRename this field "WINNING_SCORE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®›ê¢ûÿÿÿÿ
+r	java:S116"]Rename this field "TILE_START_VALUE_2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÜÇ¬
+r	java:S116"]Rename this field "TILE_START_VALUE_4" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒÔå«
+n	java:S116"YRename this field "MATRIX_IS_FULL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º’ô¹
+<
+java:S1170"!Make this final field static too.(®›ê¢ûÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(ÜÇ¬
+7
+java:S1170"!Make this final field static too.(ŒÔå«
+7
+java:S1170"!Make this final field static too.(º’ô¹
