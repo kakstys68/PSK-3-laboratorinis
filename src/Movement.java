@@ -9,9 +9,9 @@ public class Movement {
     public void move(char input) {
         switch (input) {
             case 'w' -> moveUp(board);
-            case 'a' -> moveLeft(board);
+            case 'a' -> moveToSide(board, Direction.LEFT);
             case 's' -> moveDown(board);
-            case 'd' -> moveRight(board);
+            case 'd' -> moveToSide(board, Direction.RIGHT);
             case 'q' -> renderer.quitting();
             default -> renderer.badInput();
         }
@@ -44,30 +44,12 @@ public class Movement {
         board.addTile();
     }
 
-
-    public void moveLeft(Board board){
+    public void moveToSide(Board board, Direction direction){
         int border;
-        for ( int i = 0; i < board.getMatrix().length; i++ ) {
-            border = 0;
-            for ( int j = 0; j < board.getMatrix().length; j++ ) {
-                if ( board.getMatrix()[i][j].getValue() != 0 ) {
-                    move(createTilePositionForMovement(i, j), Direction.LEFT, border);
-                }
-            }
-        }
-        board.addTile();
-    }
-    public void moveRight(Board board){
-        int border;
-        for (int i = 0; i < board.getMatrix().length; i++) {
-            border = (board.getMatrix().length - 1);
-            for (int j = (board.getMatrix().length - 1 ); j >= 0; j--) {
-                if (board.getMatrix()[i][j].getValue() != 0) {
-                    if (border >= j) {
-                        move(createTilePositionForMovement(i, j), Direction.RIGHT, border);
-                    }
-                }
-            }
+        int length = board.getMatrix().length;
+        for ( int i = 0; i < length; i++ ) {
+            border = setBorder(direction, length);
+            checkRow(border, i, length, direction);
         }
         board.addTile();
     }
@@ -99,6 +81,35 @@ public class Movement {
         } else {
             border = changeBorder(direction, border, Direction.RIGHT);
             horizontalMove(tilePosition, direction, border);
+        }
+    }
+
+    private int setBorder(Direction direction, int length){
+        if(direction == Direction.LEFT){
+            return 0;
+        }else{
+            return length - 1;
+        }
+    }
+
+    private void moveIfPossible(int border,int i, int j, Direction direction){
+
+        if (board.getMatrix()[i][j].getValue() != 0 ) {
+            if (border >= j) {
+                move(createTilePositionForMovement(i, j), direction, border);
+            }
+        }
+    }
+
+    private void checkRow(int border, int i, int length, Direction direction){
+        if(direction == Direction.LEFT) {
+            for (int j = 0; j < length; j++) {
+                moveIfPossible(border, i, j, direction);
+            }
+        }else{
+            for (int j = (board.getMatrix().length - 1 ); j >= 0; j--) {
+                moveIfPossible(border, i, j, direction);
+            }
         }
     }
 
